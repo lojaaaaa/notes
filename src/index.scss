@@ -70,20 +70,19 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: transform .3s ease;
+  will-change: transform;
 
+  &:hover{
+    transform: scale(1.1);
+
+  }
   .card-title{
     font-size: 16px;
     color: rgb(75, 80, 81);
   }
-
-  .card-text{
-    font-size: 48px;
-    font-weight: 600;
-  }
   .card-button{
-    position: absolute;
-    right: 5%;
-    top: 5%;
+
     cursor: pointer;
     background-color: transparent;
     border: 0;
@@ -91,6 +90,26 @@ h1 {
     color: inherit;
     font-weight: 300;
   }
+
+  .card-bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+  }
+  .card-text{
+    font-size: 48px;
+    font-weight: 600;
+  }
+
+  .card-date{
+    font-weight: 300;
+    font-size: 16px;
+    color: rgb(75, 80, 81);
+    justify-self: flex-end;
+  }
+
 }
 
 .button{
@@ -104,4 +123,11 @@ h1 {
   border: 0;
   font-size: 48px;
   align-self: flex-end;
+  transition: all .3s ease;
+  will-change: transform;
+  
+  &:hover{
+    transform: scale(0.9);
+    opacity: .7;
+  }
 }
