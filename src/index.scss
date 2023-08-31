@@ -1,0 +1,107 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: Arial, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgb(253, 253, 253);
+  background-color: rgb(19, 23, 24);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+.container{
+  max-width: 1030px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+.notes{
+  height: 100vh;
+}
+.notes__container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 50px;
+  height: 100%;
+}
+
+.title{
+}
+
+.cards{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  justify-content: center;
+  gap: 30px;
+}
+
+.card{
+  position: relative;
+  background-color: rgb(27, 30, 31);
+  border-radius: 10px;
+  padding: 15px;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .card-title{
+    font-size: 16px;
+    color: rgb(75, 80, 81);
+  }
+
+  .card-text{
+    font-size: 48px;
+    font-weight: 600;
+  }
+  .card-button{
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    cursor: pointer;
+    background-color: transparent;
+    border: 0;
+    font-size: 36px;
+    color: inherit;
+    font-weight: 300;
+  }
+}
+
+.button{
+  border-radius: 10px;
+  padding: 0.3em 0.6em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: rgb(204, 79, 79);
+  cursor: pointer;
+  border: 0;
+  font-size: 48px;
+  align-self: flex-end;
+}
