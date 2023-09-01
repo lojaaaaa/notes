@@ -1,58 +1,39 @@
+import { useState } from "react"
+import Card from "./components/Card/Card"
+import Form from "./components/Form/Form";
 
 
 const App = () => {
+
+  const [notes, setNotes] = useState([])
+
+  const [selectedNote, setSelectedNote] = useState<number | null | undefined>();
+
+  const handleButton = () =>{
+    setSelectedNote(notes.length + 1)
+  }
+
   return (
     <div className="wrapper">
       <section className="notes">
         <div className="notes__container container">
-          <h1 className="title">All Notes</h1>
-          <div className="cards">
-            <div className="card">
-              <div className="card-bottom">
-                <h3 className="card-title">About my day</h3>
-                <button className="card-button">&#8250;</button>
-              </div>
-              <div className="card-bottom">
-                <p className="card-text">250</p>
-                <p className="card-date">25.08.2023</p>
-              </div>
+          {selectedNote
+            ? <Form setSelectedNote={setSelectedNote}/>
+            :
+            <>
+              <h1 className="title">All Notes</h1>
+                <div className="cards">
+                  <Card />
+                  <Card />
+                  <Card />
+                  <Card />
+                </div>
+              <button className="button" onClick={handleButton}>+</button>
+            </>
+            }
 
-            </div>
-            <div className="card">
-              <div className="card-bottom">
-                <h3 className="card-title">About my day</h3>
-                <button className="card-button">&#8250;</button>
-              </div>
-              <div className="card-bottom">
-                <p className="card-text">250</p>
-                <p className="card-date">25.08.2023</p>
-              </div>
 
-            </div>
-            <div className="card">
-              <div className="card-bottom">
-                <h3 className="card-title">About my day</h3>
-                <button className="card-button">&#8250;</button>
-              </div>
-              <div className="card-bottom">
-                <p className="card-text">250</p>
-                <p className="card-date">25.08.2023</p>
-              </div>
 
-            </div>
-            <div className="card">
-              <div className="card-bottom">
-                <h3 className="card-title">About my day</h3>
-                <button className="card-button">&#8250;</button>
-              </div>
-              <div className="card-bottom">
-                <p className="card-text">250</p>
-                <p className="card-date">25.08.2023</p>
-              </div>
-
-            </div>
-          </div>
-          <button className="button">+</button>
         </div>
       </section>
     </div>
