@@ -1,5 +1,7 @@
 export interface ICard {
   title?: string,
-  date?: string,
-  count?: number
+  created?: string,
+  text?: string,
+  id: number,
+  count?: number,
 }

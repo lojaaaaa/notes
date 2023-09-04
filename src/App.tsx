@@ -5,7 +5,12 @@ import Form from "./components/Form/Form";
 
 const App = () => {
 
-  const [notes, setNotes] = useState([])
+  const [notes, setNotes] = useState([
+    {id: 1, created: '04.09.2023', text: 'some text', title: 'Head title', count: 50},
+    {id: 2, created: '04.09.2023', text: 'some text2', title: 'Head title2', count: 50},
+    {id: 3, created: '04.09.2023', text: 'some text3', title: 'Head title3', count: 50},
+    {id: 4, created: '04.09.2023', text: 'some text4', title: 'Head title4', count: 50},
+  ])
 
   const [selectedNote, setSelectedNote] = useState<number | null | undefined>();
 
@@ -18,22 +23,29 @@ const App = () => {
       <section className="notes">
         <div className="notes__container container">
           {selectedNote
-            ? <Form setSelectedNote={setSelectedNote}/>
+            ? <Form
+              notes={notes} 
+              selectedNote={selectedNote} 
+              setNotes={setNotes} 
+              setSelectedNote={setSelectedNote}/>
             :
             <>
               <h1 className="title">All Notes</h1>
                 <div className="cards">
-                  <Card />
-                  <Card />
-                  <Card />
-                  <Card />
+                  {notes.map(note => 
+                    <Card 
+                      title={note.title}
+                      text={note.text}
+                      count={note.count}
+                      created={note.created}
+                      key={note.id}
+                      id={note.id}
+                      setSelectedNote={setSelectedNote}
+                    />)}
                 </div>
               <button className="button" onClick={handleButton}>+</button>
             </>
             }
-
-
-
         </div>
       </section>
     </div>
