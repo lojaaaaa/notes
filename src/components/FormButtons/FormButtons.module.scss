@@ -1,0 +1,22 @@
+.formButtons{
+  display: flex;
+  justify-content: space-between;
+}
+.formButton{
+  cursor: pointer;
+  font-size: 36px;
+  border: 0;
+  background-color: transparent;
+  color: rgb(253, 253, 253);
+}
+.buttons{
+  display: flex;
+  gap: 20px;
+}
+.button{
+  cursor: pointer;
+  font-size: 24px;
+  border: 0;
+  background-color: transparent;
+  color: rgb(253, 253, 253);
+}

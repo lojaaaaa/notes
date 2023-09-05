@@ -3,6 +3,7 @@ import style from './Form.module.scss'
 import { ICard } from '../../types/types';
 import useInput from '../../hooks/useInput';
 import { updateNotesLocalStorage } from '../../utils/updateNotesLocalStorage';
+import FormButtons from '../FormButtons/FormButtons';
 
 
 
@@ -13,7 +14,7 @@ interface Props {
   setNotes: React.Dispatch<React.SetStateAction<ICard[]>>
 }
 
-const Form: FC<Props> = ({notes, selectedNote, setSelectedNote, setNotes}) => {
+const Form: FC<Props> = ({notes, selectedNote, setNotes, setSelectedNote}) => {
 
   const currentNote: ICard = useMemo(() => 
     (notes.find(note => note.id === selectedNote) || {text: '', title: ''}
@@ -22,6 +23,12 @@ const Form: FC<Props> = ({notes, selectedNote, setSelectedNote, setNotes}) => {
   const title = useInput(currentNote.title)
   const text = useInput(currentNote.text)
 
+
+  const removeNote = (id: number) =>{
+    const updatedNotes = notes.filter(notes => notes.id !== id)
+    setNotes(updatedNotes)
+    updateNotesLocalStorage(updatedNotes)
+  }
 
 
 
@@ -53,10 +60,7 @@ const Form: FC<Props> = ({notes, selectedNote, setSelectedNote, setNotes}) => {
 
   return (
     <>
-      <div className={style.buttons}>
-        <button onClick={() => setSelectedNote(0)} className={style.button}>&larr;</button>
-        <button onClick={onSave} className={style.button}>&#128190;</button>
-      </div>
+      <FormButtons removeNote={removeNote} id={selectedNote} onSave={onSave} setSelectedNote={setSelectedNote}/>
       <form className={style.form}>
         <input 
           {...title}
