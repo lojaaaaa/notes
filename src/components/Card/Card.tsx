@@ -1,11 +1,11 @@
-import React, { FC} from 'react';
+import React, { FC, memo} from 'react';
 import { ICard } from '../../types/types';
 
 interface ICardProps extends ICard {
   setSelectedNote: React.Dispatch<React.SetStateAction<number>>
 }
 
-const Card: FC<ICardProps> = ({
+const Card: FC<ICardProps> = memo(({
   title, 
   count, 
   created, 
@@ -13,7 +13,9 @@ const Card: FC<ICardProps> = ({
   }) => {
 
   const onEditNote = () => {
-    setSelectedNote(id)
+    if(id){
+      setSelectedNote(id)
+    } 
   }
 
   return (
@@ -28,6 +30,6 @@ const Card: FC<ICardProps> = ({
       </div>
   </div>
   )
-}
+})
 
 export default Card
