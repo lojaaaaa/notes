@@ -2,18 +2,18 @@ import { useState } from "react"
 import Card from "./components/Card/Card"
 import Form from "./components/Form/Form";
 import { ICard } from "./types/types";
+import { getFromLocalStorage } from "./utils/getFromLocalStorage";
 
 
 const App = () => {
 
-  const [notes, setNotes] = useState<ICard[]>([
-    {id: 1, created: '04.09.2023', text: 'some text', title: 'Head title', count: 50},
-    {id: 2, created: '04.09.2023', text: 'some text2', title: 'Head title2', count: 50},
-    {id: 3, created: '04.09.2023', text: 'some text3', title: 'Head title3', count: 50},
-    {id: 4, created: '04.09.2023', text: 'some text4', title: 'Head title4', count: 50},
-  ])
-
+  const [notes, setNotes] = useState<ICard[]>([])
   const [selectedNote, setSelectedNote] = useState<number>(0);
+
+  useEffect(()=>{
+    const parsedNotes = getFromLocalStorage("notes") as ICard[]
+    setNotes(parsedNotes)
+  }, [])
 
   const onCreateNote = () =>{
     setSelectedNote(notes.length + 1)
