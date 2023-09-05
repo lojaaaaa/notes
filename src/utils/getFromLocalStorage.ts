@@ -1,3 +1,4 @@
+
 export const getFromLocalStorage = (getItemName: string) =>{
     const storedNotes = localStorage.getItem(getItemName)
     if (storedNotes !== null){
