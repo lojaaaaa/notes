@@ -2,16 +2,20 @@ import React, { FC} from 'react';
 import { ICard } from '../../types/types';
 
 interface ICardProps extends ICard {
-  setSelectedNote: (id: number) => void;
+  setSelectedNote: React.Dispatch<React.SetStateAction<number>>
 }
 
-const Card: FC<ICardProps> = ({title, count, created, setSelectedNote, id}) => {
+const Card: FC<ICardProps> = ({
+  title, 
+  count, 
+  created, 
+  setSelectedNote, id
+  }) => {
 
   const onEditNote = () => {
     setSelectedNote(id)
   }
 
-  
   return (
     <div className="card">
       <div className="card-bottom">

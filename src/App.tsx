@@ -13,7 +13,7 @@ const App = () => {
     {id: 4, created: '04.09.2023', text: 'some text4', title: 'Head title4', count: 50},
   ])
 
-  const [selectedNote, setSelectedNote] = useState<number | null>(null);
+  const [selectedNote, setSelectedNote] = useState<number>(0);
 
   const onCreateNote = () =>{
     setSelectedNote(notes.length + 1)

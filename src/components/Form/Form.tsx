@@ -1,41 +1,43 @@
-import React, { FC, useState} from 'react';
+import React, { FC, useState, useMemo} from 'react';
 import style from './Form.module.scss'
 import { ICard } from '../../types/types';
 
 
+
 interface Props {
   notes: ICard[],
-  selectedNote?: number | null,
-  setSelectedNote?: React.Dispatch<React.SetStateAction<number | null>>
-  setNotes?: React.Dispatch<React.SetStateAction<ICard[]>>
+  selectedNote: number
+  setSelectedNote: React.Dispatch<React.SetStateAction<number>>
+  setNotes: React.Dispatch<React.SetStateAction<ICard[]>>
 }
 
 const Form: FC<Props> = ({notes, selectedNote, setSelectedNote, setNotes}) => {
 
-  const currentNote = notes.find(note => note.id === selectedNote)
+  const currentNote: ICard = useMemo(() => (notes.find(note => note.id === selectedNote) 
+    || {text: '', title: ''}
+  ), [selectedNote, notes])
   
-  const [title, setTitle] = useState(currentNote?.title)
-  const [text, setText] = useState(currentNote?.text)
+  const [title, setTitle] = useState(currentNote.title)
+  const [text, setText] = useState(currentNote.text)
 
 
   const onSave = () => {
-    const newNote = {
-      id: selectedNote, 
-      created: '04.09.2023', 
-      text: text, 
-      title: title, 
-      count: text?.length
-    }
 
-
-    if(notes.find(note => note.id === currentNote?.id)){
+    if(currentNote.id){
       const index = notes.findIndex((note) => note.id === selectedNote);
-      const updatedNote = { ...notes[index], text: text, title: title, count: text?.length};
-      const updatedNotes = [...notes];
+      const updatedNote = { ...currentNote, text: text, title: title, count: text?.length};
+      const updatedNotes = [...notes]
       updatedNotes[index] = updatedNote;
       setNotes(updatedNotes)
     }
     else{
+      const newNote: ICard = {
+        id: selectedNote, 
+        created: '04.09.2023', 
+        text: text, 
+        title: title, 
+        count: text.length || 0
+      }
       setNotes(prev => [...prev, newNote])
     }
 
@@ -46,7 +48,7 @@ const Form: FC<Props> = ({notes, selectedNote, setSelectedNote, setNotes}) => {
   return (
     <>
       <div className={style.buttons}>
-        <button onClick={() => setSelectedNote(null)} className={style.button}>	&larr;</button>
+        <button onClick={() => setSelectedNote(0)} className={style.button}>&larr;</button>
         <button onClick={onSave} className={style.button}>&#128190;</button>
       </div>
       <form className={style.form}>
