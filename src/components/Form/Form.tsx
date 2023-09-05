@@ -1,7 +1,8 @@
-import React, { FC, useMemo, useCallback} from 'react';
+import React, { FC, useMemo} from 'react';
 import style from './Form.module.scss'
 import { ICard } from '../../types/types';
 import useInput from '../../hooks/useInput';
+import { updateNotesLocalStorage } from '../../utils/updateNotesLocalStorage';
 
 
 
@@ -22,7 +23,7 @@ const Form: FC<Props> = ({notes, selectedNote, setSelectedNote, setNotes}) => {
   const text = useInput(currentNote.text)
 
 
-  
+
 
   const onSave = () => {
 
@@ -32,6 +33,7 @@ const Form: FC<Props> = ({notes, selectedNote, setSelectedNote, setNotes}) => {
       const updatedNotes = [...notes]
       updatedNotes[index] = updatedNote;
       setNotes(updatedNotes)
+      updateNotesLocalStorage(updatedNotes)
     }
     else{
       const newNote: ICard = {
@@ -42,6 +44,7 @@ const Form: FC<Props> = ({notes, selectedNote, setSelectedNote, setNotes}) => {
         count: text.value.length || 0
       }
       setNotes(prev => [...prev, newNote])
+      updateNotesLocalStorage([...notes, newNote])
     }
 
     
