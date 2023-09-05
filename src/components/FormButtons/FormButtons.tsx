@@ -7,6 +7,7 @@ interface Props{
   removeNote: (id: number) => void,
   setSelectedNote: React.Dispatch<React.SetStateAction<number>>
 }
+
 const FormButtons: FC<Props> = ({id, onSave, setSelectedNote, removeNote}) => {
 
   const onDeleteNote = () =>{
@@ -21,7 +22,6 @@ const FormButtons: FC<Props> = ({id, onSave, setSelectedNote, removeNote}) => {
         <button onClick={onDeleteNote} className={style.button}>&#10006;</button>
         <button onClick={onSave} className={style.button}>&#128190;</button>
       </div>
-      
     </div>
   )
 }

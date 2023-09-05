@@ -4,6 +4,7 @@ import { ICard } from '../../types/types';
 import useInput from '../../hooks/useInput';
 import { updateNotesLocalStorage } from '../../utils/updateNotesLocalStorage';
 import FormButtons from '../FormButtons/FormButtons';
+import { getCurrentDate } from '../../utils/getCurrentDate';
 
 
 
@@ -43,9 +44,10 @@ const Form: FC<Props> = ({notes, selectedNote, setNotes, setSelectedNote}) => {
       updateNotesLocalStorage(updatedNotes)
     }
     else{
+
       const newNote: ICard = {
         id: selectedNote, 
-        created: '04.09.2023', 
+        created: getCurrentDate(), 
         text: text.value, 
         title: title.value, 
         count: text.value.length || 0
