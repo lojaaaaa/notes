@@ -1,4 +1,4 @@
-import React, { FC, useMemo} from 'react';
+import React, { FC, useMemo, useCallback} from 'react';
 import style from './Form.module.scss'
 import { ICard } from '../../types/types';
 import useInput from '../../hooks/useInput';
@@ -21,7 +21,8 @@ const Form: FC<Props> = ({notes, selectedNote, setSelectedNote, setNotes}) => {
   const title = useInput(currentNote.title)
   const text = useInput(currentNote.text)
 
-  console.log(title)
+
+  
 
   const onSave = () => {
 
