@@ -7,7 +7,7 @@ interface ICardProps extends ICard {
 
 const Card: FC<ICardProps> = ({title, count, created, setSelectedNote, id}) => {
 
-  const onEdit = () => {
+  const onEditNote = () => {
     setSelectedNote(id)
   }
 
@@ -16,7 +16,7 @@ const Card: FC<ICardProps> = ({title, count, created, setSelectedNote, id}) => {
     <div className="card">
       <div className="card-bottom">
         <h3 className="card-title">{title}</h3>
-        <button onClick={onEdit} className="card-button">&#8250;</button>
+        <button onClick={onEditNote} className="card-button">&#8250;</button>
       </div>
       <div className="card-bottom">
         <p className="card-text">{count}</p>

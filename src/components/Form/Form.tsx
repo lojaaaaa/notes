@@ -1,21 +1,21 @@
 import React, { FC, useState} from 'react';
 import style from './Form.module.scss'
+import { ICard } from '../../types/types';
 
 
-type Props = {
-  title?: string,
-  setSelectedNote?: React.Dispatch<React.SetStateAction<number | null | undefined>>
-  setNotes?: React.Dispatch<React.SetStateAction<number | null | undefined>>
+interface Props {
+  notes: ICard[],
+  selectedNote?: number | null,
+  setSelectedNote?: React.Dispatch<React.SetStateAction<number | null>>
+  setNotes?: React.Dispatch<React.SetStateAction<ICard[]>>
 }
 
 const Form: FC<Props> = ({notes, selectedNote, setSelectedNote, setNotes}) => {
 
-
-  const index = notes.findIndex(note => note.id === selectedNote)
-  console.log(index)
-
-  const [title, setTitle] = useState(notes[index]?.title)
-  const [text, setText] = useState(notes[index]?.text)
+  const currentNote = notes.find(note => note.id === selectedNote)
+  
+  const [title, setTitle] = useState(currentNote?.title)
+  const [text, setText] = useState(currentNote?.text)
 
 
   const onSave = () => {
@@ -24,15 +24,16 @@ const Form: FC<Props> = ({notes, selectedNote, setSelectedNote, setNotes}) => {
       created: '04.09.2023', 
       text: text, 
       title: title, 
-      count: text.length
+      count: text?.length
     }
 
-    if(notes.find(note => note.id === selectedNote)){
+
+    if(notes.find(note => note.id === currentNote?.id)){
       const index = notes.findIndex((note) => note.id === selectedNote);
-      const updatedNote = { ...notes[index], text: text, title: title, count: text.length};
+      const updatedNote = { ...notes[index], text: text, title: title, count: text?.length};
       const updatedNotes = [...notes];
       updatedNotes[index] = updatedNote;
-      setNotes([...updatedNotes])
+      setNotes(updatedNotes)
     }
     else{
       setNotes(prev => [...prev, newNote])
@@ -49,8 +50,19 @@ const Form: FC<Props> = ({notes, selectedNote, setSelectedNote, setNotes}) => {
         <button onClick={onSave} className={style.button}>&#128190;</button>
       </div>
       <form className={style.form}>
-        <input value={title} onChange={(e) => setTitle(e.target.value)} type='text' className={style.title} placeholder='Заголовок'></input>
-        <textarea value={text} onChange={(e) => setText(e.target.value)}className={style.text} placeholder='Заметка'></textarea>
+        <input 
+          value={title} 
+          onChange={(e) => setTitle(e.target.value)} 
+          type='text' 
+          className={style.title} 
+          placeholder='Заголовок'>
+        </input>
+        <textarea 
+          value={text} 
+          onChange={(e) => setText(e.target.value)}
+          className={style.text} 
+          placeholder='Заметка'>
+        </textarea>
       </form>
     </>
 

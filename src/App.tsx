@@ -1,20 +1,21 @@
 import { useState } from "react"
 import Card from "./components/Card/Card"
 import Form from "./components/Form/Form";
+import { ICard } from "./types/types";
 
 
 const App = () => {
 
-  const [notes, setNotes] = useState([
+  const [notes, setNotes] = useState<ICard[]>([
     {id: 1, created: '04.09.2023', text: 'some text', title: 'Head title', count: 50},
     {id: 2, created: '04.09.2023', text: 'some text2', title: 'Head title2', count: 50},
     {id: 3, created: '04.09.2023', text: 'some text3', title: 'Head title3', count: 50},
     {id: 4, created: '04.09.2023', text: 'some text4', title: 'Head title4', count: 50},
   ])
 
-  const [selectedNote, setSelectedNote] = useState<number | null | undefined>();
+  const [selectedNote, setSelectedNote] = useState<number | null>(null);
 
-  const handleButton = () =>{
+  const onCreateNote = () =>{
     setSelectedNote(notes.length + 1)
   }
 
@@ -43,7 +44,7 @@ const App = () => {
                       setSelectedNote={setSelectedNote}
                     />)}
                 </div>
-              <button className="button" onClick={handleButton}>+</button>
+              <button className="button" onClick={onCreateNote}>+</button>
             </>
             }
         </div>
