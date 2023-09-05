@@ -60,7 +60,6 @@ const Form: FC<Props> = ({notes, selectedNote, setSelectedNote, setNotes}) => {
           className={style.title} 
           placeholder='Заголовок'>
         </input>
-
         <textarea 
           {...text}
           className={style.text} 
