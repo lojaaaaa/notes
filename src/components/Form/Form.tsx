@@ -1,6 +1,7 @@
-import React, { FC, useState, useMemo} from 'react';
+import React, { FC, useMemo} from 'react';
 import style from './Form.module.scss'
 import { ICard } from '../../types/types';
+import useInput from '../../hooks/useInput';
 
 
 
@@ -13,19 +14,20 @@ interface Props {
 
 const Form: FC<Props> = ({notes, selectedNote, setSelectedNote, setNotes}) => {
 
-  const currentNote: ICard = useMemo(() => (notes.find(note => note.id === selectedNote) 
-    || {text: '', title: ''}
+  const currentNote: ICard = useMemo(() => 
+    (notes.find(note => note.id === selectedNote) || {text: '', title: ''}
   ), [selectedNote, notes])
-  
-  const [title, setTitle] = useState(currentNote.title)
-  const [text, setText] = useState(currentNote.text)
 
+  const title = useInput(currentNote.title)
+  const text = useInput(currentNote.text)
+
+  console.log(title)
 
   const onSave = () => {
 
     if(currentNote.id){
       const index = notes.findIndex((note) => note.id === selectedNote);
-      const updatedNote = { ...currentNote, text: text, title: title, count: text?.length};
+      const updatedNote = { ...currentNote, text: text.value, title: title.value, count: text.value.length};
       const updatedNotes = [...notes]
       updatedNotes[index] = updatedNote;
       setNotes(updatedNotes)
@@ -34,9 +36,9 @@ const Form: FC<Props> = ({notes, selectedNote, setSelectedNote, setNotes}) => {
       const newNote: ICard = {
         id: selectedNote, 
         created: '04.09.2023', 
-        text: text, 
-        title: title, 
-        count: text.length || 0
+        text: text.value, 
+        title: title.value, 
+        count: text.value.length || 0
       }
       setNotes(prev => [...prev, newNote])
     }
@@ -53,15 +55,14 @@ const Form: FC<Props> = ({notes, selectedNote, setSelectedNote, setNotes}) => {
       </div>
       <form className={style.form}>
         <input 
-          value={title} 
-          onChange={(e) => setTitle(e.target.value)} 
+          {...title}
           type='text' 
           className={style.title} 
           placeholder='Заголовок'>
         </input>
+
         <textarea 
-          value={text} 
-          onChange={(e) => setText(e.target.value)}
+          {...text}
           className={style.text} 
           placeholder='Заметка'>
         </textarea>
