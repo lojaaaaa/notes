@@ -32,6 +32,8 @@ const App = () => {
             :
             <>
               <h1 className="title">All Notes</h1>
+                {notes.length > 0
+                ? 
                 <div className="cards">
                   {notes.map(note => 
                     <Card 
@@ -44,6 +46,9 @@ const App = () => {
                       setSelectedNote={setSelectedNote}
                     />)}
                 </div>
+                : <p className="empty">...</p>
+                }
+
               <button className="button" onClick={onCreateNote}>+</button>
             </>
             }

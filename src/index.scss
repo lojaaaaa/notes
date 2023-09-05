@@ -53,18 +53,17 @@ h1 {
   padding: 0 15px;
 }
 .notes{
-  height: 100vh;
+  margin-bottom: 200px;
 }
 .notes__container{
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 50px;
-  height: 100%;
+  padding-top: 150px;
+  gap: 80px;
+
 }
 
-.title{
-}
+
 
 .cards{
   display: grid;
@@ -82,13 +81,8 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform .3s ease;
-  will-change: transform;
 
-  &:hover{
-    transform: scale(1.1);
 
-  }
   .card-title{
     font-size: 16px;
     color: rgb(75, 80, 81);
@@ -135,11 +129,30 @@ h1 {
   border: 0;
   font-size: 48px;
   align-self: flex-end;
-  transition: all .3s ease;
-  will-change: transform;
-  
-  &:hover{
-    transform: scale(0.9);
-    opacity: .7;
+
+
+}
+
+.empty{
+  font-size: 40px;
+  text-align: center;
+}
+
+@media(min-width: 800px){
+
+  .card{
+    transition: transform .3s ease;
+    will-change: transform;
+    &:hover{
+      transform: scale(1.1);
+    }
+  }
+  .button{
+    transition: all .3s ease;
+    will-change: transform;
+    &:hover{
+      transform: scale(0.9);
+      opacity: .7;
+    }
   }
 }

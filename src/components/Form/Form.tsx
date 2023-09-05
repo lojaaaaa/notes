@@ -7,7 +7,6 @@ import FormButtons from '../FormButtons/FormButtons';
 import { getCurrentDate } from '../../utils/getCurrentDate';
 
 
-
 interface Props {
   notes: ICard[],
   selectedNote: number
@@ -15,7 +14,12 @@ interface Props {
   setNotes: React.Dispatch<React.SetStateAction<ICard[]>>
 }
 
-const Form: FC<Props> = ({notes, selectedNote, setNotes, setSelectedNote}) => {
+const Form: FC<Props> = (
+  {
+    notes, 
+    selectedNote, 
+    setNotes, 
+    setSelectedNote}) => {
 
   const currentNote: ICard = useMemo(() => 
     (notes.find(note => note.id === selectedNote) || {text: '', title: ''}
@@ -32,19 +36,18 @@ const Form: FC<Props> = ({notes, selectedNote, setNotes, setSelectedNote}) => {
   }
 
 
-
   const onSave = () => {
 
     if(currentNote.id){
-      const index = notes.findIndex((note) => note.id === selectedNote);
-      const updatedNote = { ...currentNote, text: text.value, title: title.value, count: text.value.length};
+      const index = notes.findIndex((note) => note.id === selectedNote)
+      const updatedNote = { ...currentNote, text: text.value, title: title.value, count: text.value.length}
       const updatedNotes = [...notes]
-      updatedNotes[index] = updatedNote;
+      updatedNotes[index] = updatedNote
+
       setNotes(updatedNotes)
       updateNotesLocalStorage(updatedNotes)
     }
     else{
-
       const newNote: ICard = {
         id: selectedNote, 
         created: getCurrentDate(), 
