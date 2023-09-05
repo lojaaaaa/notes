@@ -1,0 +1,6 @@
+const [notes, setNotes] = useState<ICard[]>([
+    {id: 1, created: '04.09.2023', text: 'some text', title: 'Head title', count: 50},
+    {id: 2, created: '04.09.2023', text: 'some text2', title: 'Head title2', count: 50},
+    {id: 3, created: '04.09.2023', text: 'some text3', title: 'Head title3', count: 50},
+    {id: 4, created: '04.09.2023', text: 'some text4', title: 'Head title4', count: 50},
+])
